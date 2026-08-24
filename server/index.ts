@@ -25,9 +25,10 @@ import {
   verifyToken,
 } from './auth';
 import { AGE_BANDS, GENDERS, type Sender } from '../lib/types';
+import { envNumber, envString } from './env';
 
-const PORT = Number(process.env.SOCKET_PORT ?? 3001);
-const ORIGINS = (process.env.ALLOWED_ORIGINS ?? 'http://localhost:3000')
+const PORT = envNumber('SOCKET_PORT', 3001);
+const ORIGINS = envString('ALLOWED_ORIGINS', 'http://localhost:3000')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);

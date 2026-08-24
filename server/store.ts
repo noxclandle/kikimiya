@@ -10,10 +10,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import type { Sender, SiteConfig, StoredMessage } from '../lib/types';
+import { envNumber, envString } from './env';
 
-const DATA_DIR = process.env.DATA_DIR
-  ? path.resolve(process.env.DATA_DIR)
-  : path.resolve(process.cwd(), 'data');
+const DATA_DIR = path.resolve(envString('DATA_DIR', path.join(process.cwd(), 'data')));
 const DB_FILE = path.join(DATA_DIR, 'kikimiya.json');
 
 interface DailyStat {
@@ -29,8 +28,8 @@ interface Database {
 }
 
 const DEFAULT_CONFIG: SiteConfig = {
-  replyEtaDays: Number(process.env.REPLY_ETA_DAYS ?? 3),
-  inviteTimeoutSeconds: Number(process.env.INVITE_TIMEOUT_SECONDS ?? 60),
+  replyEtaDays: envNumber('REPLY_ETA_DAYS', 3),
+  inviteTimeoutSeconds: envNumber('INVITE_TIMEOUT_SECONDS', 60),
 };
 
 function emptyDb(): Database {
@@ -77,7 +76,7 @@ load();
 
 export function today(): string {
   // 運営者のタイムゾーン（既定はJST）で日付を切り替える
-  const tz = process.env.STATS_TIMEZONE ?? 'Asia/Tokyo';
+  const tz = envString('STATS_TIMEZONE', 'Asia/Tokyo');
   return new Intl.DateTimeFormat('sv-SE', { timeZone: tz }).format(new Date());
 }
 

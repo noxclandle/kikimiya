@@ -23,13 +23,14 @@ import type {
   VisitorSummary,
 } from '../lib/types';
 import * as store from './store';
+import { envNumber } from './env';
 import { attemptKey, issueToken, lockedFor, noteFailure, noteSuccess, verifyToken } from './auth';
 
-const HEARTBEAT_TIMEOUT_MS = Number(process.env.HEARTBEAT_TIMEOUT_MS ?? 15_000);
-const STALE_AFTER_MS = Number(process.env.HEARTBEAT_STALE_MS ?? 8_000);
+const HEARTBEAT_TIMEOUT_MS = envNumber('HEARTBEAT_TIMEOUT_MS', 15_000);
+const STALE_AFTER_MS = envNumber('HEARTBEAT_STALE_MS', 8_000);
 const SWEEP_INTERVAL_MS = 3_000;
 /** 神父の接続が切れてから、実際に離席とみなすまでの猶予 */
-const FATHER_GRACE_MS = Number(process.env.FATHER_GRACE_MS ?? 20_000);
+const FATHER_GRACE_MS = envNumber('FATHER_GRACE_MS', 20_000);
 const MAX_CHAT_BUFFER = 200;
 const MAX_CHAT_LENGTH = 2000;
 

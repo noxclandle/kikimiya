@@ -4,6 +4,7 @@
  * 会員登録・ユーザーDBは持たない（来訪者側に認証は一切ない）。
  */
 import crypto from 'node:crypto';
+import { envNumber } from './env';
 
 const TOKEN_TTL_MS = 12 * 60 * 60 * 1000; // 12時間
 const tokens = new Map<string, number>(); // token -> 失効時刻
@@ -35,8 +36,8 @@ export function passwordConfigured(): boolean {
  * 誰からの試行かはIPアドレスそのものではなく、
  * 起動ごとに変わるソルトでハッシュ化した値で数える（IPは保持しない）。
  */
-const FAIL_LIMIT = Number(process.env.LOGIN_FAIL_LIMIT ?? 5);
-const LOCK_MS = Number(process.env.LOGIN_LOCK_MS ?? 15 * 60 * 1000);
+const FAIL_LIMIT = envNumber('LOGIN_FAIL_LIMIT', 5);
+const LOCK_MS = envNumber('LOGIN_LOCK_MS', 15 * 60 * 1000);
 const ATTEMPT_SALT = crypto.randomBytes(16);
 const attempts = new Map<string, { count: number; lockedUntil: number; resetAt: number }>();
 

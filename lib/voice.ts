@@ -4,16 +4,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { KikimiyaSocket } from './socket';
 import type { RtcSignal } from './types';
 
-const STUN_URLS = (
-  process.env.NEXT_PUBLIC_STUN_URLS ?? 'stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302'
-)
+const DEFAULT_STUN = 'stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302';
+
+// 空文字が入っていても既定値に落ちるよう ?? ではなく || を使う。
+// ここが空配列になると、音声がまったく繋がらなくなる。
+const STUN_URLS = (process.env.NEXT_PUBLIC_STUN_URLS || DEFAULT_STUN)
   .split(',')
   .map((url) => url.trim())
   .filter(Boolean);
 
 /** TURN が要る回線（対称NAT等）向け。未設定なら STUN のみで試みる。 */
 function iceServers(): RTCIceServer[] {
-  const servers: RTCIceServer[] = [{ urls: STUN_URLS }];
+  const servers: RTCIceServer[] = STUN_URLS.length > 0 ? [{ urls: STUN_URLS }] : [];
   const turnUrl = process.env.NEXT_PUBLIC_TURN_URL;
   if (turnUrl) {
     servers.push({

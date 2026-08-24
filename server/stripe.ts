@@ -12,6 +12,7 @@
  * 秘密鍵はコードに書かず、必ず環境変数から読み込む。
  */
 import Stripe from 'stripe';
+import { envNumber, envString } from './env';
 
 let client: Stripe | null = null;
 let cachedPriceId: string | null = null;
@@ -30,10 +31,10 @@ function stripe(): Stripe {
 }
 
 /** JPY は最小単位が「円」なので、そのままの数値を渡す */
-const CURRENCY = (process.env.DONATION_CURRENCY ?? 'jpy').toLowerCase();
-const PRESET = Number(process.env.DONATION_PRESET_AMOUNT ?? 1000);
-const MIN = Number(process.env.DONATION_MIN_AMOUNT ?? 100);
-const MAX = Number(process.env.DONATION_MAX_AMOUNT ?? 100000);
+const CURRENCY = envString('DONATION_CURRENCY', 'jpy').toLowerCase();
+const PRESET = envNumber('DONATION_PRESET_AMOUNT', 1000);
+const MIN = envNumber('DONATION_MIN_AMOUNT', 100);
+const MAX = envNumber('DONATION_MAX_AMOUNT', 100000);
 
 /**
  * 「金額はお客様が決める」Price を用意する。
