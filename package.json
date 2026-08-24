@@ -1,0 +1,39 @@
+{
+  "name": "kikimiya",
+  "version": "0.1.0",
+  "private": true,
+  "description": "聴き宮 — オンライン告解室",
+  "scripts": {
+    "dev": "concurrently -n web,socket -c cyan,magenta \"npm:dev:web\" \"npm:dev:socket\"",
+    "dev:web": "next dev -p 3000",
+    "dev:socket": "tsx watch server/index.ts",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "start:socket": "tsx server/index.ts",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "next": "^15.5.23",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
+    "stripe": "^22.5.0",
+    "tsx": "^4.23.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "concurrently": "^10.0.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
+  }
+}

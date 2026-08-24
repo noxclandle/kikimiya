@@ -1,0 +1,34 @@
+# 常時起動サーバー（Socket.io + 手紙API）を Render に置くための設定。
+# Render のダッシュボードで「Blueprint」からこのリポジトリを指定すると読み込まれます。
+#
+# ⚠️ 無料プランでは足りません。
+#    - 無料プランはアクセスが無いと停止する → 神父が在室でいられない
+#    - 無料プランは永続ディスクが付かない  → 預かった手紙が再起動で消える
+services:
+  - type: web
+    name: kikimiya-realtime
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm ci
+    startCommand: npm run start:socket
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: kikimiya-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SOCKET_PORT
+        value: "3001"
+      - key: DATA_DIR
+        value: /var/data
+      - key: STATS_TIMEZONE
+        value: Asia/Tokyo
+      # 下の3つは Render の画面で入力する（リポジトリには置かない）
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false

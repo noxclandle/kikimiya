@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0c0a09;
+  --color-ink-2: #15110f;
+  --color-ink-3: #1e1815;
+  --color-paper: #ece3d5;
+  --color-paper-dim: #a89e8f;
+  --color-gold: #c9a44c;
+  --color-gold-dim: #8a7233;
+  --color-moss: #7d8f76;
+  --color-ember: #c2603f;
+
+  --font-mincho: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP",
+    "Sawarabi Mincho", "MS PMincho", serif;
+  --font-gothic: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/*
+ * 背景は html 側にだけ置く。
+ * body に背景色を持たせると、それが「通常フローのブロック背景」として
+ * 負の z-index（= 全面の背景写真）より後に描かれ、写真を覆い隠してしまうため。
+ */
+html {
+  background-color: var(--color-ink);
+  /* 蝋燭の灯りのような、ごく淡い光 */
+  background-image:
+    radial-gradient(ellipse 60rem 40rem at 50% -10%, rgba(201, 164, 76, 0.10), transparent 70%),
+    radial-gradient(ellipse 40rem 30rem at 50% 110%, rgba(201, 164, 76, 0.05), transparent 70%);
+  background-attachment: fixed;
+}
+
+html,
+body {
+  color: var(--color-paper);
+  font-family: var(--font-mincho);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* ------------------------------ 部品 ------------------------------ */
+/* Tailwind のユーティリティと併用する、素のCSSで書いた共通部品。 */
+
+.panel {
+  border: 1px solid rgba(236, 227, 213, 0.09);
+  /*
+   * 背景写真の上に載るので、やや不透明にして文字を読みやすくする。
+   * backdrop-filter（すりガラス）は、全面固定の背景レイヤーと重ねると
+   * スクロール中に描画が崩れる環境があるため使わない。
+   */
+  background: color-mix(in srgb, var(--color-ink-2) 88%, transparent);
+  border-radius: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  border-color: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+  color: var(--color-gold);
+}
+.btn-primary:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-gold) 20%, transparent);
+}
+
+.btn-quiet {
+  border-color: rgba(236, 227, 213, 0.13);
+  color: var(--color-paper-dim);
+}
+.btn-quiet:hover:not(:disabled) {
+  border-color: rgba(236, 227, 213, 0.32);
+  color: var(--color-paper);
+}
+
+.btn-danger {
+  border-color: color-mix(in srgb, var(--color-ember) 50%, transparent);
+  color: var(--color-ember);
+}
+.btn-danger:hover:not(:disabled) {
+  border-color: var(--color-ember);
+  background: color-mix(in srgb, var(--color-ember) 12%, transparent);
+}
+
+.field {
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid rgba(236, 227, 213, 0.13);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.75rem 1rem;
+  color: var(--color-paper);
+  font-family: inherit;
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--color-paper-dim) 55%, transparent);
+}
+.field:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-gold) 60%, transparent);
+}
+
+.label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--color-paper-dim);
+}
+
+.rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--color-gold) 28%, transparent),
+    transparent
+  );
+}
+
+/* 背景写真の上に直接置く文字を、わずかに沈ませて読みやすくする */
+.on-backdrop {
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.link {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--color-gold) 40%, transparent);
+}
+.link:hover {
+  text-decoration-color: var(--color-gold);
+}
+
+/* 音量スライダー */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(236, 227, 213, 0.18);
+  border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 10px rgba(201, 164, 76, 0.5);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  cursor: pointer;
+}
+
+/* 来訪を知らせる枠。離れていても目に入るよう、ゆっくり明滅させる */
+@keyframes kikimiya-summon {
+  0%, 100% {
+    border-color: color-mix(in srgb, var(--color-gold) 45%, transparent);
+    box-shadow: 0 0 0 rgba(201, 164, 76, 0);
+  }
+  50% {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 44px rgba(201, 164, 76, 0.35);
+  }
+}
+
+.summon {
+  animation: kikimiya-summon 1.8s ease-in-out infinite;
+}
+
+@keyframes kikimiya-alarm {
+  0%, 100% {
+    border-color: color-mix(in srgb, var(--color-ember) 50%, transparent);
+    box-shadow: 0 0 0 rgba(194, 96, 63, 0);
+  }
+  50% {
+    border-color: var(--color-ember);
+    box-shadow: 0 0 44px rgba(194, 96, 63, 0.4);
+  }
+}
+
+.alarm {
+  animation: kikimiya-alarm 1.2s ease-in-out infinite;
+}
+
+@keyframes kikimiya-breathe {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.breathe {
+  animation: kikimiya-breathe 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathe {
+    animation: none;
+    opacity: 0.8;
+  }
+  .summon {
+    animation: none;
+    border-color: var(--color-gold);
+  }
+  .alarm {
+    animation: none;
+    border-color: var(--color-ember);
+  }
+}
