@@ -1,0 +1,47 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案A メニュー</title><link rel="stylesheet" href="common.css">
+<style>
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 70px; }
+  .head { display:flex; align-items:baseline; gap:16px; margin-bottom:18px; }
+  .head h1 { font-size:.95rem; color:#ffcc4d; letter-spacing:.12em; }
+  .board { display:grid; grid-template-columns: 250px 1fr; gap:16px; }
+  .panel { padding:18px; }
+  .cat { display:flex; align-items:center; gap:10px; padding:13px 10px; cursor:pointer; color:#b7b0c9; font-size:.62rem; }
+  .cat .mark { opacity:0; color:#ffcc4d; }
+  .cat.on { color:#ffcc4d; background:rgba(255,204,77,.08); }
+  .cat.on .mark { opacity:1; }
+  .cat small { display:block; color:#6b6480; font-size:.8em; margin-top:6px; }
+  .items { display:flex; flex-direction:column; gap:10px; }
+  .item { display:flex; gap:16px; align-items:center; padding:15px 16px;
+          border:2px solid #221c33; background:rgba(122,47,191,.07); cursor:pointer; }
+  .item:hover { border-color:#ffcc4d; background:rgba(255,204,77,.09); }
+  .item .ic { width:44px; height:44px; flex:0 0 44px; display:grid; place-items:center; font-size:1.35rem; }
+  .item .tx b { font-size:.7rem; color:#fff; letter-spacing:.08em; }
+  .item .tx small { display:block; margin-top:8px; color:#8f88a6; font-size:.62rem; }
+  .item.lock { opacity:.42; }
+  .item.holy { border-color:#3a2f18; background:linear-gradient(90deg, rgba(255,204,77,.12), rgba(122,47,191,.05)); }
+</style></head><body>
+<div class="wrap">
+  <div class="head"><h1>HEXA RELATION</h1><span class="crumb">MENU</span></div>
+  <div class="board">
+    <div class="panel frame">
+      <div class="cat on"><span class="mark">▶</span><span>PROFILE<small class="jp">この会社のこと</small></span></div>
+      <div class="cat"><span class="mark">▶</span><span>PRODUCTS<small class="jp">使えるサービス</small></span></div>
+      <div class="cat"><span class="mark">▶</span><span>CONTACT<small class="jp">ご依頼・相談</small></span></div>
+    </div>
+    <div class="panel frame">
+      <div class="items">
+        <div class="item"><div class="ic">🗃</div><div class="tx"><b>SAVE DATA</b><small class="jp">せいさく じっせき</small></div></div>
+        <div class="item"><div class="ic">👾</div><div class="tx"><b>DEVELOPER</b><small class="jp">せいさくしゃ</small></div></div>
+        <div class="item"><div class="ic">💳</div><div class="tx"><b>HEXA CARD</b><small class="jp">電子名刺</small></div></div>
+        <div class="item"><div class="ic">🌀</div><div class="tx"><b>TOP3ANIME</b><small class="jp">すきなアニメ3選</small></div></div>
+        <div class="item"><div class="ic">📋</div><div class="tx"><b>SPI CHECK</b><small class="jp">適性検査を無料診断</small></div></div>
+        <div class="item holy"><div class="ic">🕯</div><div class="tx"><b>聴き宮</b><small class="jp">誰にも言えないことを、話す</small></div></div>
+        <div class="item lock"><div class="ic">🔒</div><div class="tx"><b>カイロス</b><small class="jp">鋭意製作中</small></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="hintbar jp">↑↓ でえらぶ　／　クリックでけってい</p>
+</body></html>

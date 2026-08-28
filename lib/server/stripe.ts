@@ -11,6 +11,7 @@
  *
  * 秘密鍵はコードに書かず、必ず環境変数から読み込む。
  */
+import 'server-only';
 import Stripe from 'stripe';
 import { envNumber, envString } from './env';
 

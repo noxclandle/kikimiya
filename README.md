@@ -35,7 +35,6 @@
 | `lib/server/` | Supabase への読み書き、席と順番の管理、神父の簡易認証、連投の抑制 |
 | `lib/` | 画面側の部品と、通り道・生存信号・WebRTC のロジック |
 | `supabase/schema.sql` | テーブル定義。Supabase の SQL Editor に貼って実行する |
-| `server/` | **旧**：Socket.io の常時起動サーバー。いまはどの画面からも使っていません |
 
 ### 画面
 

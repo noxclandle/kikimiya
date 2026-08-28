@@ -1,0 +1,98 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案G 絵馬掛け</title><link rel="stylesheet" href="shrine.css">
+<style>
+  body{ background:
+    radial-gradient(130% 70% at 50% -10%, #33202a 0%, #180f16 50%, #0a070a 100%); }
+  .wrap{ max-width:1020px; margin:0 auto; padding:26px 20px 90px; }
+  .head{ text-align:center; margin-bottom:12px; }
+  .head h1{ font-size:.82rem; color:var(--kin); letter-spacing:.16em; }
+  .head p{ margin-top:12px; font-size:.58rem; color:#a2968a; }
+
+  /* 上の鳥居 */
+  .toriiTop{ margin:20px auto 30px; --w:520px; --h:64px; }
+
+  .section{ margin-bottom:34px; }
+  /* 掛け木（横木） */
+  .beam{ position:relative; height:16px; background:linear-gradient(#7a5730,#4d3620);
+    border:3px solid #000; box-shadow:0 4px 0 rgba(0,0,0,.5); }
+  .beam .label{ position:absolute; left:50%; top:-16px; transform:translateX(-50%);
+    background:var(--shu); border:3px solid #000; color:#fff; padding:6px 15px;
+    font-size:.52rem; letter-spacing:.14em; white-space:nowrap; }
+  .beam .label small{ display:block; margin-top:6px; font-size:.85em; opacity:.85;
+    font-family:'Hiragino Mincho ProN',serif; }
+
+  .emas{ display:flex; flex-wrap:wrap; gap:20px; justify-content:center; padding-top:34px; }
+  .ema{ width:146px; cursor:pointer; transition:transform .18s; transform-origin:top center; }
+  .ema:hover{ transform:rotate(-2.5deg) translateY(3px); }
+  .ema .string{ height:26px; width:2px; margin:0 auto; background:#c9bfae; }
+  .ema .plate{
+    position:relative; padding:26px 10px 16px; text-align:center;
+    background:linear-gradient(#c69a63,#9d7442);
+    border:3px solid #3a2612;
+    clip-path: polygon(50% 0%, 100% 21%, 100% 100%, 0% 100%, 0% 21%);
+    box-shadow:0 5px 0 rgba(0,0,0,.45);
+  }
+  .ema .ic{ font-size:1.4rem; }
+  .ema b{ display:block; margin-top:11px; font-size:.46rem; color:#2b1a0c; letter-spacing:.03em; }
+  .ema small{ display:block; margin-top:8px; font-size:.55rem; color:#4a3116; }
+  .ema.lock .plate{ background:linear-gradient(#6d6156,#4d443c); }
+  .ema.lock{ opacity:.55; }
+  .ema.miya .plate{ background:linear-gradient(#e8cf94,#c9a559); border-color:#5c4110;
+    box-shadow:0 5px 0 rgba(0,0,0,.45), 0 0 26px rgba(216,180,90,.55); }
+
+  .foot{ display:flex; align-items:flex-end; justify-content:center; gap:16px; margin-top:34px; }
+  .foot img{ width:88px; }
+  .say{ background:var(--kinari); color:#241a12; border:3px solid #000; padding:12px 16px;
+    font-size:.55rem; box-shadow:4px 4px 0 rgba(0,0,0,.6); margin-bottom:12px; }
+</style></head><body>
+<div class="wrap">
+  <div class="head">
+    <h1>HEXA RELATION</h1>
+    <p class="jp">ゲームの世界を、現実の武器に。</p>
+  </div>
+
+  <div class="torii toriiTop"><div class="kasagi"></div><div class="nuki"></div>
+    <div class="legs"><div class="leg"></div><div class="leg"></div></div></div>
+
+  <div class="section">
+    <div class="beam"><div class="label">PROFILE<small>この社のこと</small></div></div>
+    <div class="emas">
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">🗃</div>
+        <b>SAVE DATA</b><small class="jp">せいさく じっせき</small></div></div>
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">👾</div>
+        <b>DEVELOPER</b><small class="jp">せいさくしゃ</small></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="beam"><div class="label">PRODUCTS<small>授かりもの</small></div></div>
+    <div class="emas">
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">💳</div>
+        <b>HEXA CARD</b><small class="jp">電子名刺</small></div></div>
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">🌀</div>
+        <b>TOP3ANIME</b><small class="jp">アニメ3選</small></div></div>
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">📋</div>
+        <b>SPI CHECK</b><small class="jp">適性検査</small></div></div>
+      <div class="ema miya"><div class="string"></div><div class="plate"><div class="ic">🕯</div>
+        <b>聴き宮</b><small class="jp">はなす ところ</small></div></div>
+      <div class="ema lock"><div class="string"></div><div class="plate"><div class="ic">🔒</div>
+        <b>カイロス</b><small class="jp">鋭意製作中</small></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="beam"><div class="label">CONTACT<small>社務所</small></div></div>
+    <div class="emas">
+      <div class="ema"><div class="string"></div><div class="plate"><div class="ic">🟢</div>
+        <b>REQUEST</b><small class="jp">ご依頼・お見積り</small></div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="say jp">願いごとは 絵馬に。<br>ご用は 社務所へ。</div>
+    <img src="matan-pixel.png" alt="マタン">
+  </div>
+</div>
+<p class="hintbar jp">絵馬を クリック / タップ</p>
+</body></html>

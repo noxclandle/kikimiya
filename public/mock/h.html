@@ -1,0 +1,95 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案H 境内</title><link rel="stylesheet" href="shrine.css">
+<style>
+  body{ background:#07050a; }
+  .keidai{ position:relative; min-height:100vh; overflow:hidden;
+    background:
+      radial-gradient(140% 60% at 50% -6%, #3a2330 0%, #1b1119 45%, #0a070b 100%); }
+  .moon{ position:absolute; right:11%; top:6%; width:52px; height:52px; border-radius:50%;
+    background:#f2e6c4; box-shadow:0 0 44px rgba(242,230,196,.5); }
+  .hill{ position:absolute; left:0; right:0; bottom:22%; height:120px;
+    background:#140e14; clip-path:polygon(0 100%,0 46%,16% 22%,34% 52%,52% 16%,72% 46%,88% 24%,100% 52%,100% 100%); }
+  .yard{ position:absolute; left:0; right:0; bottom:0; height:24%;
+    background:repeating-linear-gradient(90deg,#241d24 0 54px,#1d171d 54px 57px);
+    border-top:3px solid #000; }
+
+  .top{ position:relative; text-align:center; padding-top:26px; }
+  .top h1{ font-size:.8rem; color:var(--kin); letter-spacing:.16em; }
+  .top p{ margin-top:11px; font-size:.55rem; color:#a2968a; }
+
+  /* 入口の鳥居 */
+  .entry{ position:relative; margin:22px auto 4px; --w:300px; --h:70px; }
+
+  .grounds{ position:relative; max-width:1000px; margin:0 auto; padding:14px 20px 0;
+    display:flex; gap:20px; justify-content:center; align-items:flex-end; flex-wrap:wrap; }
+
+  .yashiro{ width:150px; cursor:pointer; text-align:center; transition:.18s; }
+  .yashiro:hover{ transform:translateY(-7px); }
+  /* 反り屋根 */
+  .roof{ position:relative; height:26px;
+    background:linear-gradient(#4a3a44,#302530);
+    border:3px solid #000; border-radius:60% 60% 0 0 / 100% 100% 0 0; }
+  .roof::before,.roof::after{ content:''; position:absolute; top:-7px; width:16px; height:4px;
+    background:var(--kin); }
+  .roof::before{ left:-6px; transform:rotate(-22deg); }
+  .roof::after{ right:-6px; transform:rotate(22deg); }
+  .wall{ background:linear-gradient(#3a2f38,#251d24); border:3px solid #000; border-top:none;
+    padding:14px 8px 15px; }
+  .wall .ic{ font-size:1.4rem; }
+  .wall b{ display:block; margin-top:10px; font-size:.46rem; color:#f0e6d4; }
+  .wall small{ display:block; margin-top:7px; font-size:.5rem; color:#9a8e82; }
+  .steps{ height:8px; background:#4a4048; border:3px solid #000; border-top:none; margin:0 8px; }
+
+  /* 聴き宮＝摂社 */
+  .miya .roof{ background:linear-gradient(#6b5327,#463415); }
+  .miya .wall{ background:linear-gradient(#3b2c17,#241a0d); border-color:#000; }
+  .miya{ filter:drop-shadow(0 0 24px rgba(216,180,90,.42)); }
+  .miya .shime{ height:7px; margin:0 6px; background:#e8dcc0; border:3px solid #000;
+    border-bottom:none; }
+
+  /* 提灯を左右に */
+  .lamp{ position:absolute; bottom:15%; }
+  .lamp.l{ left:7%; } .lamp.r{ right:7%; }
+
+  .matan{ position:absolute; left:50%; bottom:5%; transform:translateX(-50%); width:86px; }
+  .say{ position:absolute; left:50%; bottom:calc(5% + 92px); transform:translateX(-50%);
+    background:var(--kinari); color:#241a12; border:3px solid #000; padding:11px 15px;
+    font-size:.53rem; white-space:nowrap; box-shadow:4px 4px 0 rgba(0,0,0,.6); }
+</style></head><body>
+<div class="keidai">
+  <div class="moon"></div><div class="hill"></div><div class="yard"></div>
+
+  <div class="top">
+    <h1>HEXA RELATION</h1>
+    <p class="jp">ゲームの世界を、現実の武器に。</p>
+    <div class="torii entry"><div class="kasagi"></div><div class="nuki"></div>
+      <div class="legs"><div class="leg"></div><div class="leg"></div></div></div>
+  </div>
+
+  <div class="grounds">
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">🗃</div>
+      <b>SAVE DATA</b><small class="jp">じっせき</small></div><div class="steps"></div></div>
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">👾</div>
+      <b>DEVELOPER</b><small class="jp">せいさくしゃ</small></div><div class="steps"></div></div>
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">💳</div>
+      <b>HEXA CARD</b><small class="jp">電子名刺</small></div><div class="steps"></div></div>
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">🌀</div>
+      <b>TOP3ANIME</b><small class="jp">アニメ3選</small></div><div class="steps"></div></div>
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">📋</div>
+      <b>SPI CHECK</b><small class="jp">適性検査</small></div><div class="steps"></div></div>
+    <div class="yashiro miya"><div class="shime"></div><div class="roof"></div>
+      <div class="wall"><div class="ic">🕯</div><b>聴き宮</b><small class="jp">はなす ところ</small></div>
+      <div class="steps"></div></div>
+    <div class="yashiro"><div class="roof"></div><div class="wall"><div class="ic">🟢</div>
+      <b>REQUEST</b><small class="jp">社務所</small></div><div class="steps"></div></div>
+  </div>
+
+  <div class="lamp l"><div class="chochin"><span>宮</span></div></div>
+  <div class="lamp r"><div class="chochin"><span>聴</span></div></div>
+
+  <div class="say jp">どこか お参りして いきますか？</div>
+  <img class="matan" src="matan-pixel.png" alt="マタン">
+</div>
+<p class="hintbar jp">社を クリック / タップ　／　矢印キーで あるく</p>
+</body></html>

@@ -5,11 +5,8 @@
   "description": "聴き宮 — オンライン告解室",
   "scripts": {
     "dev": "next dev -p 3000",
-    "dev:web": "next dev -p 3000",
-    "dev:socket": "tsx watch server/index.ts",
     "build": "next build",
     "start": "next start -p 3000",
-    "start:socket": "tsx server/index.ts",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:flow": "tsx --conditions react-server scripts/check-flow.ts"

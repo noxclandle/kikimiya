@@ -1,0 +1,67 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案E 町マップ</title><link rel="stylesheet" href="common.css">
+<style>
+  body { background:#05040a; }
+  .sky { position:relative; min-height:100vh; overflow:hidden;
+    background:
+      radial-gradient(120% 70% at 50% 0%, #241a3d 0%, #0d0918 55%, #05040a 100%); }
+  .stars i { position:absolute; width:2px; height:2px; background:#fff; opacity:.5; }
+  .ground { position:absolute; left:0; right:0; bottom:0; height:26%;
+    background:linear-gradient(#171126, #0a0713); border-top:3px solid #2c2140; }
+  .town { position:relative; max-width:1080px; margin:0 auto; padding:78px 20px 0;
+          display:flex; gap:22px; align-items:flex-end; justify-content:center; flex-wrap:wrap; }
+  .bld { width:158px; cursor:pointer; text-align:center; transition:.18s; }
+  .bld:hover { transform:translateY(-7px); }
+  .roof { height:0; border-left:79px solid transparent; border-right:79px solid transparent; }
+  .wall { padding:16px 8px 18px; border:3px solid #000; border-top:none; }
+  .bld .ic { font-size:1.5rem; }
+  .bld b { display:block; margin-top:11px; font-size:.5rem; letter-spacing:.05em; }
+  .bld small { display:block; margin-top:7px; font-size:.48rem; opacity:.75; }
+  /* 建物ごとの色 */
+  .b1 .roof{border-bottom:34px solid #6b4bb0} .b1 .wall{background:#3d2b66;color:#e6dcff}
+  .b2 .roof{border-bottom:34px solid #c98a3f} .b2 .wall{background:#6b4a22;color:#ffeccc}
+  .b3 .roof{border-bottom:34px solid #3f7f6a} .b3 .wall{background:#22493d;color:#d9f5ec}
+  /* 聴き宮＝教会 */
+  .miya .roof{border-bottom:44px solid #b89340}
+  .miya .wall{background:linear-gradient(#2a2118,#171008); color:#ffe6a8; border-color:#000;}
+  .miya .cross{ color:#ffcc4d; font-size:.9rem; margin-bottom:-4px; }
+  .miya { filter: drop-shadow(0 0 22px rgba(255,204,77,.3)); }
+  /* マタン */
+  .matan { position:absolute; left:50%; bottom:6%; transform:translateX(-50%); width:96px;
+           image-rendering:pixelated; }
+  .say { position:absolute; left:50%; bottom:calc(6% + 100px); transform:translateX(-50%);
+         background:#fdfbf4; color:#201a2e; border:3px solid #201a2e; padding:11px 14px;
+         font-size:.52rem; white-space:nowrap; box-shadow:4px 4px 0 rgba(0,0,0,.5); }
+  .say::after{content:'';position:absolute;left:50%;margin-left:-6px;bottom:-12px;
+    border:6px solid transparent;border-top-color:#201a2e;}
+</style></head><body>
+<div class="sky">
+  <div class="stars">
+    <i style="left:8%;top:9%"></i><i style="left:23%;top:17%"></i><i style="left:41%;top:7%"></i>
+    <i style="left:63%;top:14%"></i><i style="left:78%;top:6%"></i><i style="left:91%;top:19%"></i>
+  </div>
+  <div class="ground"></div>
+
+  <div class="town">
+    <div class="bld b1"><div class="roof"></div><div class="wall">
+      <div class="ic">🗃</div><b>SAVE DATA</b><small class="jp">じっせき</small></div></div>
+    <div class="bld b1"><div class="roof"></div><div class="wall">
+      <div class="ic">👾</div><b>DEVELOPER</b><small class="jp">せいさくしゃ</small></div></div>
+    <div class="bld b2"><div class="roof"></div><div class="wall">
+      <div class="ic">💳</div><b>HEXA CARD</b><small class="jp">電子名刺</small></div></div>
+    <div class="bld b2"><div class="roof"></div><div class="wall">
+      <div class="ic">🌀</div><b>TOP3ANIME</b><small class="jp">アニメ3選</small></div></div>
+    <div class="bld b2"><div class="roof"></div><div class="wall">
+      <div class="ic">📋</div><b>SPI CHECK</b><small class="jp">適性検査</small></div></div>
+    <div class="bld miya"><div class="cross">✚</div><div class="roof"></div><div class="wall">
+      <div class="ic">🕯</div><b>聴き宮</b><small class="jp">はなす ところ</small></div></div>
+    <div class="bld b3"><div class="roof"></div><div class="wall">
+      <div class="ic">🟢</div><b>REQUEST</b><small class="jp">ごいらい</small></div></div>
+  </div>
+
+  <div class="say jp">どこか よって いきますか？</div>
+  <img class="matan" src="matan-pixel.png" alt="マタン">
+</div>
+<p class="hintbar jp">たてものを クリック / タップ　／　矢印キーで あるく</p>
+</body></html>

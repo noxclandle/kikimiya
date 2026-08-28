@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createDonationSession, stripeConfigured } from '@/server/stripe';
+import { createDonationSession, stripeConfigured } from '@/lib/server/stripe';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

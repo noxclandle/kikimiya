@@ -1,0 +1,72 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案D そうび／アイテム欄</title><link rel="stylesheet" href="common.css">
+<style>
+  .wrap { max-width:1060px; margin:0 auto; padding:22px 20px 84px; }
+  .board { display:grid; grid-template-columns: 232px 1fr; gap:16px; }
+  /* 左：ステータス窓 */
+  .status { padding:16px; text-align:center; }
+  .status img { width:118px; image-rendering:pixelated; margin:6px 0 10px; }
+  .status .nm { font-size:.6rem; color:#ffcc4d; letter-spacing:.1em; }
+  .status .ttl { font-size:.5rem; color:#8f88a6; margin-top:9px; line-height:1.9; }
+  .bar { margin-top:16px; text-align:left; font-size:.48rem; color:#8f88a6; line-height:2.4; }
+  .bar span { color:#7fe0c0; float:right; }
+  /* 右：アイテム格子 */
+  .inv { padding:16px; }
+  .cat { font-size:.55rem; letter-spacing:.12em; margin:4px 0 11px; display:flex; gap:10px; align-items:center; }
+  .cat::after { content:''; flex:1; height:1px; background:currentColor; opacity:.28; }
+  .c1{color:#c9a3ff}.c2{color:#ffcc4d}.c3{color:#7fe0c0}
+  .slots { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:9px; margin-bottom:20px; }
+  .slot { aspect-ratio:1; display:grid; place-content:center; text-align:center; gap:7px; cursor:pointer;
+          border:2px solid #241d38; background:
+            linear-gradient(145deg, rgba(255,255,255,.045), transparent), #0e0a17; }
+  .slot:hover { border-color:#ffcc4d; background:rgba(255,204,77,.1); }
+  .slot .ic { font-size:1.55rem; }
+  .slot b { font-size:.44rem; color:#d8d3e6; letter-spacing:.04em; }
+  .slot.empty { border-style:dashed; opacity:.28; cursor:default; }
+  .slot.lock { opacity:.38; }
+  .slot.holy { border-color:#6b5622;
+     background: radial-gradient(120% 100% at 50% 0%, rgba(255,204,77,.22), transparent 70%), #0e0a17; }
+  @media(max-width:760px){ .board{grid-template-columns:1fr} }
+</style></head><body>
+<div class="wrap">
+  <div class="board">
+    <div class="status frame">
+      <img src="matan-pixel.png" alt="マタン">
+      <div class="nm">MATAN</div>
+      <div class="ttl jp">Hexa Relation<br>だいひょう</div>
+      <div class="bar jp">
+        サービス <span>4</span><br>
+        じっせき <span>12</span><br>
+        せいさくちゅう <span>1</span>
+      </div>
+    </div>
+
+    <div class="inv frame">
+      <div class="cat c1">PROFILE</div>
+      <div class="slots">
+        <div class="slot"><div class="ic">🗃</div><b>SAVE DATA</b></div>
+        <div class="slot"><div class="ic">👾</div><b>DEVELOPER</b></div>
+        <div class="slot empty"></div><div class="slot empty"></div>
+      </div>
+
+      <div class="cat c2">PRODUCTS</div>
+      <div class="slots">
+        <div class="slot"><div class="ic">💳</div><b>HEXA CARD</b></div>
+        <div class="slot"><div class="ic">🌀</div><b>TOP3ANIME</b></div>
+        <div class="slot"><div class="ic">📋</div><b>SPI CHECK</b></div>
+        <div class="slot holy"><div class="ic">🕯</div><b>聴き宮</b></div>
+        <div class="slot lock"><div class="ic">🔒</div><b>カイロス</b></div>
+        <div class="slot empty"></div>
+      </div>
+
+      <div class="cat c3">CONTACT</div>
+      <div class="slots">
+        <div class="slot"><div class="ic">🟢</div><b>REQUEST</b></div>
+        <div class="slot empty"></div><div class="slot empty"></div><div class="slot empty"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="hintbar jp">あいている わくには これから ふえていきます</p>
+</body></html>

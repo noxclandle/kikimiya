@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+* { box-sizing:border-box; margin:0; padding:0; }
+:root{
+  --shu:#c8402f;      /* 朱 */
+  --shu-dark:#8f2a1e;
+  --sumi:#100c0e;     /* 墨 */
+  --kinari:#efe6d2;   /* 生成り */
+  --kin:#d8b45a;      /* 金 */
+  --moss:#5d7a5a;
+  --wood:#8a6136;
+  --wood-dark:#5c3f22;
+}
+body{ background:var(--sumi); color:var(--kinari); min-height:100vh;
+  font-family:'Press Start 2P',monospace; image-rendering:pixelated; }
+.jp{ font-family:'Hiragino Mincho ProN','Yu Mincho',serif; letter-spacing:.05em; }
+.jpg{ font-family:'Hiragino Sans','Yu Gothic',sans-serif; }
+
+/* 鳥居 */
+.torii{ position:relative; width:var(--w,200px); }
+.torii .kasagi{ height:12px; background:var(--shu); border:3px solid #000;
+  box-shadow:0 3px 0 var(--shu-dark); }
+.torii .nuki{ height:8px; margin:9px 8% 0; background:var(--shu); border:3px solid #000; }
+.torii .legs{ display:flex; justify-content:space-between; padding:0 11%; margin-top:-3px; }
+.torii .leg{ width:13px; height:var(--h,74px); background:var(--shu);
+  border:3px solid #000; border-top:none; box-shadow:inset -4px 0 0 var(--shu-dark); }
+
+/* 提灯 */
+.chochin{ width:26px; height:36px; border-radius:46% / 30%; border:3px solid #000;
+  background:repeating-linear-gradient(#e8dcc0 0 5px,#d8cbaa 5px 6px);
+  position:relative; box-shadow:0 0 20px rgba(216,180,90,.6); }
+.chochin::before{ content:''; position:absolute; left:50%; top:-9px; transform:translateX(-50%);
+  width:9px; height:7px; background:#241a12; border:2px solid #000; }
+.chochin span{ position:absolute; inset:0; display:grid; place-items:center;
+  color:var(--shu); font-size:.6rem; font-family:'Hiragino Mincho ProN',serif; }
+
+/* 石畳 */
+.ishidatami{ background:
+  repeating-linear-gradient(90deg,#2a2429 0 46px,#221d22 46px 48px),
+  repeating-linear-gradient(#2a2429 0 46px,#221d22 46px 48px); }
+
+.hintbar{ position:fixed; left:0; right:0; bottom:0; padding:11px; background:#000;
+  border-top:2px solid #2a2028; text-align:center; font-size:.5rem; color:#8a7f74; }

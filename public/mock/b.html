@@ -1,0 +1,59 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案B ステージセレクト</title><link rel="stylesheet" href="common.css">
+<style>
+  .wrap { max-width: 1000px; margin:0 auto; padding: 26px 20px 70px; }
+  .head { text-align:center; margin-bottom:26px; }
+  .head h1 { font-size:.95rem; color:#ffcc4d; letter-spacing:.14em; }
+  .head p { margin-top:12px; }
+  .zone { margin-bottom: 30px; }
+  .ztitle { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .ztitle span { font-size:.62rem; letter-spacing:.14em; }
+  .ztitle small { color:#6b6480; font-size:.55rem; }
+  .ztitle::after { content:''; flex:1; height:2px; background:currentColor; opacity:.25; }
+  .z1 { color:#c9a3ff; } .z2 { color:#ffcc4d; } .z3 { color:#7fe0c0; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(178px,1fr)); gap:12px; }
+  .card { padding:20px 14px; text-align:center; cursor:pointer;
+          border:2px solid #221c33; background:#100c1a; transition:.15s; }
+  .card:hover { transform: translateY(-3px); border-color:#ffcc4d; }
+  .card .ic { font-size:1.9rem; line-height:1; }
+  .card b { display:block; margin-top:14px; font-size:.58rem; color:#fff; letter-spacing:.06em; }
+  .card small { display:block; margin-top:9px; color:#8f88a6; font-size:.58rem; }
+  .card.lock { opacity:.4; }
+  .card.holy { border-color:#5a4a1e; background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,204,77,.16), transparent 70%), #0e0a12; }
+</style></head><body>
+<div class="wrap">
+  <div class="head">
+    <h1>HEXA RELATION</h1>
+    <p class="crumb">SELECT</p>
+  </div>
+
+  <div class="zone">
+    <div class="ztitle z1"><span>PROFILE</span><small class="jp">この会社のこと</small></div>
+    <div class="grid">
+      <div class="card"><div class="ic">🗃</div><b>SAVE DATA</b><small class="jp">せいさく じっせき</small></div>
+      <div class="card"><div class="ic">👾</div><b>DEVELOPER</b><small class="jp">せいさくしゃ</small></div>
+    </div>
+  </div>
+
+  <div class="zone">
+    <div class="ztitle z2"><span>PRODUCTS</span><small class="jp">使えるサービス</small></div>
+    <div class="grid">
+      <div class="card"><div class="ic">💳</div><b>HEXA CARD</b><small class="jp">電子名刺</small></div>
+      <div class="card"><div class="ic">🌀</div><b>TOP3ANIME</b><small class="jp">すきなアニメ3選</small></div>
+      <div class="card"><div class="ic">📋</div><b>SPI CHECK</b><small class="jp">適性検査を無料診断</small></div>
+      <div class="card holy"><div class="ic">🕯</div><b>聴き宮</b><small class="jp">誰にも言えないことを、話す</small></div>
+      <div class="card lock"><div class="ic">🔒</div><b>カイロス</b><small class="jp">鋭意製作中</small></div>
+    </div>
+  </div>
+
+  <div class="zone">
+    <div class="ztitle z3"><span>CONTACT</span><small class="jp">ご依頼・お問い合わせ</small></div>
+    <div class="grid">
+      <div class="card"><div class="ic">🟢</div><b>REQUEST</b><small class="jp">ご依頼・お見積り</small></div>
+    </div>
+  </div>
+</div>
+<p class="hintbar jp">きになる ものを クリック / タップ</p>
+</body></html>
