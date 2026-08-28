@@ -74,8 +74,8 @@ export function EmergencyModal({ open, onClose }: { open: boolean; onClose: () =
           ひとりで抱えないでください
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-paper-dim">
-          聴き宮は、ただ話を聴くだけの場所です。いま危ないと感じるとき、
-          専門の人に頼るほうが確かなことがあります。下の窓口は、あなたのためにあります。
+          聴き宮の神父は、資格を持った専門家ではありません。いま危ないと感じるとき、
+          専門の人に頼るほうが確かです。下の窓口は、あなたのためにあります。
         </p>
 
         <div className="my-5 rule" />

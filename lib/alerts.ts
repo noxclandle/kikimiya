@@ -362,3 +362,41 @@ export function useWakeLock(enabled: boolean): { supported: boolean; active: boo
 
   return { supported, active };
 }
+
+/* ------------------------------------------------------------------ */
+/* 離席の検知                                                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 最後に人が触った時刻を返す。
+ *
+ * 「パソコンの前にいる限り在室」で運用すると、席を外したまま
+ * オンラインにし続ける状況が必ず来る。待たせたまま気づかないより、
+ * 一定時間まったく触られていないことを見て、正直に離席へ落とすほうがよい。
+ *
+ * 画面を見ているだけでも触ったことにはならないので、
+ * 「待っている人がいるのに反応が無い」ときだけの判断材料として使うこと。
+ */
+export function useLastActivity(): { current: number } {
+  const at = useRef(Date.now());
+
+  useEffect(() => {
+    const touch = () => {
+      at.current = Date.now();
+    };
+    const events = ['pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
+    for (const name of events) window.addEventListener(name, touch, { passive: true });
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') touch();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', touch);
+    return () => {
+      for (const name of events) window.removeEventListener(name, touch);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', touch);
+    };
+  }, []);
+
+  return at;
+}

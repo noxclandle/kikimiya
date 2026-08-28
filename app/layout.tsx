@@ -4,9 +4,9 @@ import { BackdropProvider } from '@/components/Backdrop';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '聴き宮 — ただ、聴くだけの部屋',
+  title: '聴き宮 — 誰にも言えないことを、話す部屋',
   description:
-    '匿名で神父と一対一で話せる、オンラインの告解室。登録も名前も要りません。カウンセリングでも医療でもなく、ただ話を聴きます。',
+    '匿名で神父と一対一で話せる、オンラインの告解室。登録も名前も要りません。人に言えないことを打ち明け、応えてもらう場所です。カウンセリングでも医療でもありません。',
   robots: { index: true, follow: false },
 };
 
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <footer className="border-t border-white/6">
             <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-6 text-xs text-paper-dim">
-              <p>ここはカウンセリングでも医療でもありません。ただ、聴くだけの場所です。</p>
+              <p>ここはカウンセリングでも医療でもありません。打ち明け、応えるための場所です。</p>
               <nav className="flex gap-4">
                 <Link href="/terms" className="link">
                   利用規約・免責

@@ -11,6 +11,10 @@ export type VisitorState = 'idle' | 'queued' | 'invited' | 'active';
 export interface PublicStatus {
   presence: FatherPresence;
   queueLength: number;
+  /** 告解室の席数。いまは常に1。 */
+  capacity: number;
+  /** 埋まっている席の数。入室案内中の席も埋まっているものとして数える。 */
+  occupied: number;
 }
 
 /** 神父側にのみ配信する来訪者情報（匿名ハンドルと時刻のみ） */
@@ -20,6 +24,10 @@ export interface VisitorSummary {
   state: VisitorState;
   sessionId: string | null;
   joinedAt: number;
+  /** 告解室に入った時刻。まだ入っていなければ null */
+  enteredAt: number | null;
+  /** 入室を案内した相手が、いつまでに答えるべきか。案内していなければ null */
+  inviteExpiresAt: number | null;
   lastSeenAt: number;
   /** ハートビートが途切れている（=接続不安定）か */
   stale: boolean;
@@ -136,4 +144,32 @@ export interface ClientToServerEvents {
 export type RtcSignal =
   | { kind: 'offer'; sdp: string }
   | { kind: 'answer'; sdp: string }
-  | { kind: 'candidate'; candidate: unknown };
+  | { kind: 'candidate'; candidate: unknown }
+  /** マイクを開いたことを相手に伝える。受け取った発信側が offer を出し直す。 */
+  | { kind: 'ready' };
+
+/* ------------------------------------------------------------------ */
+/* リアルタイムの通り道（Supabase Realtime のブロードキャスト）           */
+/* ------------------------------------------------------------------ */
+
+/** 入口ページ全体に流れる知らせ */
+export type LobbyEvent = { event: 'status'; payload: PublicStatus };
+
+/** 待機所（神父）に流れる知らせ */
+export type AdminEvent =
+  | { event: 'state'; payload: AdminState }
+  | { event: 'arrived'; payload: { handle: string; queued: boolean } };
+
+/** 来訪者ひとりに宛てて流れる知らせ */
+export type VisitorEvent =
+  | { event: 'ready'; payload: { sessionId: string } }
+  | { event: 'invite'; payload: { expiresInSeconds: number } }
+  | { event: 'queue'; payload: { position: number; total: number } }
+  | { event: 'denied'; payload: { reason: string } }
+  | { event: 'closed'; payload: { reason: string } };
+
+/** 告解室のなかで、二人のあいだを直接ゆき来するもの */
+export type RoomEvent =
+  | { event: 'chat'; payload: ChatMessage }
+  | { event: 'rtc'; payload: RtcSignal }
+  | { event: 'closed'; payload: { reason: string } };

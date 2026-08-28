@@ -1,22 +1,24 @@
-const CONFIGURED_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL?.replace(/\/$/, '') || '';
+/**
+ * ブラウザに渡してよい設定。ここに秘密の値は置かない。
+ * NEXT_PUBLIC_ の値はビルド時に埋め込まれるため、変えたら必ずビルドし直すこと。
+ */
+
+const trim = (value: string | undefined) => (value ?? '').replace(/\/$/, '').trim();
+
+/* ---------------------- リアルタイムの通り道 ---------------------- */
+
+export const SUPABASE_URL = trim(process.env.NEXT_PUBLIC_SUPABASE_URL);
+export const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '').trim();
 
 /**
- * ブラウザから見た「常時起動サーバー」の場所。
+ * 在室状況や入室の案内を「押し出し」で受け取れるか。
  *
- * 未設定のときに localhost へ落とすのは、手元で動かしているときだけにする。
- * 公開されたサイトから ws://localhost:3001 を叩きにいっても繋がるはずがなく、
- * 「設定を入れ忘れている」ことに気づけないまま延々と再接続を繰り返すため。
+ * false でも致命傷にはしない。定期的に自分から尋ねにいく（ポーリング）ので、
+ * 反応が鈍くなるだけで、話せなくなるわけではない。
  */
-export const SERVER_URL: string = (() => {
-  if (CONFIGURED_SERVER_URL) return CONFIGURED_SERVER_URL;
-  if (typeof window === 'undefined') return 'http://localhost:3001';
-  const { hostname } = window.location;
-  if (hostname === 'localhost' || hostname === '127.0.0.1') return 'http://localhost:3001';
-  return '';
-})();
+export const REALTIME_CONFIGURED = Boolean(SUPABASE_URL && SUPABASE_KEY);
 
-/** 接続先が分かっているか。false なら在室確認も会話もできない。 */
-export const SERVER_CONFIGURED = SERVER_URL !== '';
+/* ---------------------------- お布施 ---------------------------- */
 
 /** お布施の受け口となる Payment Link。空ならお布施の導線ごと出さない。 */
 export const PAYMENT_LINK = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK || '';
@@ -30,5 +32,20 @@ export const PAYMENT_LINK = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK || '';
 export const DONATION_ENABLED =
   Boolean(PAYMENT_LINK) || process.env.NEXT_PUBLIC_DONATION_ENABLED === '1';
 
-/** ハートビートの送信間隔（サーバー側のタイムアウトは既定15秒） */
-export const HEARTBEAT_INTERVAL_MS = 5000;
+/* --------------------------- 生存の信号 --------------------------- */
+
+/*
+  信号の間隔は「サーバー側の許容時間の3分の1」を目安にしている。
+  裏に回ったタブはタイマーを1分ほどに間引かれるので、
+  短く打ってもその通りには届かない。無駄打ちを減らしつつ、
+  間引かれても1〜2回は届く幅を取る。
+*/
+
+/** 来訪者の生存信号（許容：部屋90秒・列150秒） */
+export const HEARTBEAT_INTERVAL_MS = 10000;
+
+/** 神父の在室信号（許容：120秒） */
+export const FATHER_HEARTBEAT_INTERVAL_MS = 30000;
+
+/** 押し出しが届かなかったときのために、入口が自分から尋ねにいく間隔 */
+export const STATUS_POLL_MS = REALTIME_CONFIGURED ? 30000 : 6000;

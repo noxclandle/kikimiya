@@ -14,8 +14,8 @@ export default function HelpPage() {
         <p className="text-xs tracking-[0.35em] text-paper-dim">そのほかの場所</p>
         <h1 className="text-xl tracking-[0.2em]">相談窓口</h1>
         <p className="text-sm leading-loose text-paper-dim">
-          聴き宮は、ただ話を聴くだけの場所です。専門の助けが要るとき、
-          こちらのほうが確かに力になれます。
+          聴き宮の神父は、資格を持った専門家ではありません。
+          専門の助けが要るとき、こちらのほうが確かに力になれます。
         </p>
       </header>
 

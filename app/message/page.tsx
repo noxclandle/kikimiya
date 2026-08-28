@@ -146,7 +146,7 @@ export default function MessagePage() {
           いま話せなくても、書いておけます
         </h1>
         <p className="mx-auto max-w-md text-sm leading-loose text-paper-dim">
-          神父が席にいないときも、書いたものはあとで必ず読まれます。
+          神父が席にいないときも、書いたものはあとで必ず読まれ、返事が届きます。
           名前も連絡先も要りません。
         </p>
       </section>
@@ -269,8 +269,8 @@ export default function MessagePage() {
       <section className="space-y-3 pt-2 text-xs leading-loose text-paper-dim/80">
         <div className="rule" />
         <p>
-          これはカウンセリングではありません。返事は助言でも診断でもなく、
-          読んだという返事にすぎません。
+          これはカウンセリングでも医療でもありません。返ってくるのは診断ではなく、
+          ひとりの人間の言葉です。
           <Link href="/help" className="link mx-1">
             相談窓口
           </Link>

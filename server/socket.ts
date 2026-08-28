@@ -89,6 +89,8 @@ export function createSocketServer(httpServer: HttpServer, origins: string[]): T
   const publicStatus = (): PublicStatus => ({
     presence: presence(),
     queueLength: queue.length + (invite ? 1 : 0),
+    capacity: 1,
+    occupied: activeVisitorId || invite ? 1 : 0,
   });
 
   const isStale = (visitor: Visitor): boolean =>
@@ -97,6 +99,8 @@ export function createSocketServer(httpServer: HttpServer, origins: string[]): T
   const summarize = (visitor: Visitor): VisitorSummary => ({
     visitorId: visitor.visitorId,
     handle: visitor.handle,
+    enteredAt: visitor.enteredAt ?? null,
+    inviteExpiresAt: null,
     state: visitor.state,
     sessionId: visitor.sessionId,
     joinedAt: visitor.joinedAt,
