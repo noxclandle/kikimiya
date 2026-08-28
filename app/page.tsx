@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Backdrop } from '@/components/Backdrop';
+import { DonationButton } from '@/components/DonationButton';
 import { PresenceBadge, SeatCount } from '@/components/ConnectionStatus';
 import { REALTIME_CONFIGURED, STATUS_POLL_MS } from '@/lib/config';
 import {
@@ -382,6 +383,15 @@ export default function EntrancePage() {
           何を話しても咎められません。話した内容と声は、部屋を出た時点で消えます。
           お布施は任意で、納めても納めなくても話す時間は変わりません。
         </p>
+
+        {/*
+          お布施の導線は告解室の中にしか無く、話し終えた人しか納められなかった。
+          話さずに置いていきたい人、話す前に納めたい人のために入口にも置く。
+          扱いを控えめにしているのは、順番を待つ導線より前に出さないため。
+        */}
+        <div className="flex justify-center pt-1">
+          <DonationButton variant="quiet" />
+        </div>
         <p>
           神父は資格を持った専門家ではありません。返ってくるのは、ひとりの人間の言葉です。
           <Link href="/terms" className="link mx-1">

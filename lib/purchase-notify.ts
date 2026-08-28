@@ -135,3 +135,88 @@ export async function notifyPurchase(e: PurchaseEvent): Promise<boolean> {
   });
   return false;
 }
+
+/* ==================================================================
+   来訪と書き置きの知らせ
+
+   神父が待機所のタブを開いていないと、来訪にもメッセージにも気づけない。
+   在室していれば話せるが、いなければ書き置きへの返信で応じる — その
+   「いなかったとき」を拾うための通知。
+
+   **本文は絶対に載せない。** 告解室で預かる言葉であって、Discord に
+   流すものではない。差出人の名前もメールも同じ理由で載せない。
+   「届いた」ことだけ知らせ、中身は待機所で読む。
+
+   必要な環境変数:
+     DISCORD_KIKIMIYA_WEBHOOK_URL  来訪・書き置きの宛先
+   ================================================================== */
+
+const KIKIMIYA_COLOR = 0x8d7ab8;
+
+/** 待機所の URL。ADMIN_PATH は秘匿するので、通知には載せない */
+const ADMIN_HINT = '待機所を開いて確認してください。';
+
+async function notifyKikimiya(title: string, fields: PurchaseField[]): Promise<boolean> {
+  const url = process.env.DISCORD_KIKIMIYA_WEBHOOK_URL;
+
+  if (!url) {
+    console.error('[kikimiya-notify] webhook が未設定。来訪と書き置きを取りこぼしている', {
+      title,
+    });
+    return false;
+  }
+
+  const result = await postToWebhook(url, {
+    embeds: [
+      {
+        title,
+        description: ADMIN_HINT,
+        color: KIKIMIYA_COLOR,
+        author: { name: '聴き宮' },
+        fields,
+        timestamp: new Date().toISOString(),
+      },
+    ],
+  });
+
+  if (result.ok) return true;
+
+  console.error('[kikimiya-notify] 送信に失敗', { title, reason: result.reason });
+  return false;
+}
+
+/**
+ * 書き置きが届いたことを知らせる。
+ *
+ * 本文も差出人も載せない。長さと、任意で書かれた属性だけ添える。
+ * 属性は本人が進んで書いた範囲であり、それ自体では誰かを特定しない。
+ */
+export async function notifyLetter(info: {
+  bodyLength: number;
+  hasReplyTo: boolean;
+  gender?: string;
+  ageBand?: string;
+}): Promise<boolean> {
+  const fields: PurchaseField[] = [
+    { name: '長さ', value: `${info.bodyLength} 文字`, inline: true },
+    { name: '返信先', value: info.hasReplyTo ? 'あり' : 'なし', inline: true },
+  ];
+  if (info.gender) fields.push({ name: '性別', value: info.gender, inline: true });
+  if (info.ageBand) fields.push({ name: '年代', value: info.ageBand, inline: true });
+  fields.push({ name: '本文', value: '載せていません。待機所で読んでください' });
+
+  return notifyKikimiya('書き置きが届きました', fields);
+}
+
+/**
+ * 来訪者が待っていることを知らせる。
+ *
+ * 神父が不在のあいだに誰かが来た場合だけ送る。在室中は待機所の画面と
+ * チャイムで足りるので、二重に鳴らさない。
+ */
+export async function notifyArrival(info: { queueLength: number }): Promise<boolean> {
+  return notifyKikimiya('来訪者が待っています', [
+    { name: '待っている人数', value: `${info.queueLength} 人`, inline: true },
+    { name: '神父', value: '不在', inline: true },
+  ]);
+}

@@ -4,6 +4,7 @@ import { db } from '@/lib/server/supabase';
 import { publish, siteConfig } from '@/lib/server/state';
 import { allow, sourceKey } from '@/lib/server/ratelimit';
 import { AGE_BANDS, GENDERS, type Sender } from '@/lib/types';
+import { notifyLetter } from '@/lib/purchase-notify';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -64,9 +65,10 @@ export async function POST(request: Request) {
   }
 
   const token = crypto.randomBytes(16).toString('base64url');
+  const sender = readSender(payload.sender);
   const { error } = await db()
     .from('letters')
-    .insert({ token, body, sender: readSender(payload.sender) });
+    .insert({ token, body, sender });
 
   if (error) {
     console.error('[letters] 保存に失敗:', error.message);
@@ -74,6 +76,22 @@ export async function POST(request: Request) {
   }
 
   await publish();
+
+  /*
+    届いたことを知らせる。待機所のタブを開いていないと、書き置きが来ても
+    気づけないため。
+
+    本文も差出人も渡さない。預かった言葉を外へ出さないことが、この場所の
+    前提になっている。知らせるのは「届いた」ことだけで、中身は待機所で読む。
+
+    通知に失敗しても手紙は預かれている。ここで throw させない。
+  */
+  await notifyLetter({
+    bodyLength: body.length,
+    hasReplyTo: Boolean(sender.email),
+    gender: sender.gender,
+    ageBand: sender.ageBand,
+  });
   const { replyEtaDays } = await siteConfig();
   return NextResponse.json({ token, createdAt: Date.now(), replyEtaDays }, { status: 201 });
 }
