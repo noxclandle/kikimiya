@@ -1,13 +1,17 @@
 import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import { BackdropProvider } from '@/components/Backdrop';
+import { SITE_URL } from '@/lib/site';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: '聴き宮 — 誰にも言えないことを、話す部屋',
   description:
     '匿名で神父と一対一で話せる、オンラインの告解室。登録も名前も要りません。人に言えないことを打ち明け、応えてもらう場所です。カウンセリングでも医療でもありません。',
-  robots: { index: true, follow: false },
+  metadataBase: new URL(SITE_URL),
+  // follow を止めていると、トップ以外のページへ辿ってもらえない。
+  // 見られて困るURL（部屋・書き置き）は robots.ts 側で個別に閉じている。
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
