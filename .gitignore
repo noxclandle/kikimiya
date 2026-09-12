@@ -8,3 +8,7 @@ data/
 next-env.d.ts
 .DS_Store
 .vercel
+
+# バックアップにも合言葉や鍵が入る。除外し忘れると丸ごと公開される
+.env.bak.*
+.env.*.bak
